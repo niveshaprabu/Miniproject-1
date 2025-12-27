@@ -62,8 +62,11 @@ This project demonstrates the effectiveness of combining natural language unders
 
 ## Articles published / References
 1.I. Goodfellow et al., “Generative Adversarial Networks,” NeurIPS, 2014.
+
 2.T. Xu et al., “AttnGAN: Fine-Grained Text to Image Generation,” CVPR, 2018.
+
 3.S. Reed et al., “Generative Adversarial Text to Image Synthesis,” ICML, 2016.
+
 4.Y. Zhang et al., “Emotion-Aware Face Generation via Latent Space Manipulation,” IEEE Access, 2022.
 
 
