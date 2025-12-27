@@ -1,10 +1,119 @@
-<html>
-  <head>
-    <title>
-      My Project
-    </title>
-  </head>
-  <body>
-    <h1> My Project </h1>
-  </body>
-</html>
+```
+!pip install -q diffusers transformers accelerate torch torchvision
+!pip install -q diffusers transformers accelerate torch torchvision gradio
+import torch
+from diffusers import StableDiffusionPipeline
+from IPython.display import display
+import matplotlib.pyplot as plt
+import gradio as gr
+def generate_image(prompt):
+if device == "cuda":
+with torch.autocast("cuda"):
+image = pipe(
+prompt,
+num_inference_steps=25,
+guidance_scale=7.5,
+height=512,
+width=512
+).images[0]
+else:
+image =
+pipe( prompt,
+num_inference_steps=25,
+guidance_scale=7.5,
+height=512,
+width=512
+).images[0]
+return image
+demo =
+gr.Interface( fn=generate_i
+mage,
+inputs=gr.Textbox(label="Enter Text Prompt"),
+outputs=gr.Image(label="Generated Image"),
+title="Text-to-Face Image Synthesis",
+description="Generate facial images from text using Stable Diffusion"
+)
+demo.launch(share=True)
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"Using device: {device}")
+print("Loading model... (this may take a few minutes)")
+model_id = "runwayml/stable-diffusion-v1-5"
+import torch
+from diffusers import StableDiffusionPipeline
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print("Using device:", device)
+model_id = "runwayml/stable-diffusion-v1-5"
+print("Loading model... (this will take time)")
+pipe = StableDiffusionPipeline.from_pretrained(
+model_id,
+torch_dtype=torch.float16 if device == "cuda" else torch.float32,
+safety_checker=None
+)
+pipe = pipe.to(device)
+if device == "cuda":
+pipe.enable_attention_slicing()
+print("Model loaded successfully")
+prompt = "A young women with curly hair with great smile wearing red t shirt"
+import torch
+from diffusers import StableDiffusionPipeline
+# Re-define device, model_id, and pipe to ensure they are available
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model_id = "runwayml/stable-diffusion-v1-5"
+pipe =
+StableDiffusionPipeline.from_pretrained( mod
+el_id,
+torch_dtype=torch.float16 if device == "cuda" else torch.float32,
+safety_checker=None
+)
+pipe = pipe.to(device)
+# Enable memory optimizations if on CUDA
+if device == "cuda":
+pipe.enable_attention_slicing()
+print(f"Generating image for: '{prompt}'")
+if device == "cuda":
+with torch.autocast("cuda"):
+image = pipe(
+prompt,
+num_inference_steps=25,
+guidance_scale=7.5,
+height=512,
+width=512
+).images[0]
+else:
+image =
+pipe( prompt,
+num_inference_steps=25,
+guidance_scale=7.5,
+height=512,
+width=512
+).images[0]
+import torch
+print(torch.cuda.is_available())
+import torch
+from diffusers import StableDiffusionPipeline
+from IPython.display import display
+# Re-define device, model_id, and prompt
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model_id = "runwayml/stable-diffusion-v1-5"
+prompt = "“A young women with curly hair with great smile wearing red t shirt”"
+# Re-define pipe
+pipe =
+StableDiffusionPipeline.from_pretrained( mod
+el_id,
+torch_dtype=torch.float16 if device == "cuda" else torch.float32,
+safety_checker=None
+)
+pipe = pipe.to(device)
+# Enable memory optimizations if on CUDA
+if device == "cuda":
+pipe.enable_attention_slicing()
+image =
+pipe( prompt,
+num_inference_steps=25,
+guidance_scale=7.5,
+height=512,
+width=512
+).images[0]
+display(image)
+image.save("output.png")
+```
